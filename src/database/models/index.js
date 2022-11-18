@@ -26,10 +26,15 @@ fs
     db[model.name] = model;
   });
 
+const syncDB = async () => {
+  await sequelize.sync()
+}
+
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
+  // syncDB()
 });
 
 db.sequelize = sequelize;
