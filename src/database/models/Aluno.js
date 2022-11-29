@@ -21,5 +21,15 @@ module.exports = (sequelize, DataTypes) => {
     }
     );
 
+    Aluno.associate = function(modelos){
+        Aluno.belongsToMany(modelos.Turma,{
+            as: "turma",
+            through: "alunos_has_turmas",
+            foreignKey: "aluno_id",
+            otherKey: "turma_id",
+            timestamps: false
+        })
+    }
+
     return Aluno;
 };

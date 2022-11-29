@@ -3,7 +3,12 @@ const Aluno = db.Aluno;
 
 const alunoController = {
     list: (req, res) => {
-        Aluno.findAll()
+        Aluno.findAll({
+            attributes: {exclude: ['alunos_has_turmas']},
+            include: [
+                {model: db.Turma, as: 'turma'}
+            ]
+        })
             .then(alunos => {
                 res.status(200).json(alunos)
             })
